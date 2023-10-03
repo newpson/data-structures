@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 2.4)
+project(labs-lib)
+
+add_library(array STATIC array.cpp)
+add_library(stack STATIC stack.cpp)
+add_library(stack-extended STATIC stack-extended.cpp)
+	target_link_libraries(stack-extended stack)
+add_library(stack-array STATIC stack-array.cpp)
+add_library(queue STATIC queue.cpp)
+add_library(queue-extended STATIC queue-extended.cpp)
+	target_link_libraries(queue-extended queue)
