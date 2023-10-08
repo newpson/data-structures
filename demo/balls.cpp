@@ -13,7 +13,7 @@ typedef struct game
 {
 	char input;
 	state_e state;
-	queue_t *balls;
+	queue_edu *balls;
 	int removed;
 } game_t;
 
@@ -48,7 +48,7 @@ void game_input(game_t *game)
 }
 
 static
-void game_remove(game_t *game, node_t *start, int count)
+void game_remove(game_t *game, node_edu *start, int count)
 {
 	game->removed = count;
 	for (; count; queue_remove_after(start), --count);
@@ -59,9 +59,9 @@ void game_play(game_t *game)
 {
 	int count = 0;
 	int color = -1;
-	node_t *start = NULL;
+	node_edu *start = NULL;
 	game->removed = 0;
-	for (node_t *ball = game->balls->next, *pball = game->balls;
+	for (node_edu *ball = game->balls->next, *pball = game->balls;
 			ball != game->balls;
 			ball = ball->next, pball = pball->next)
 	{

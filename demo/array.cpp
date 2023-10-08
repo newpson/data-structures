@@ -3,8 +3,8 @@
 
 int main(void)
 {
-	arr_t *a = arr_init(3, 3);
-	arr_t *b = arr_init(3, 3);
+	arr_edu *a = arr_init(3, 3);
+	arr_edu *b = arr_init(3, 3);
 
 	arr_fill(a);
 	arr_fill(b);
@@ -18,7 +18,7 @@ int main(void)
 	std::cout << "a+b >>" << std::endl;
 	arr_print(a);
 
-	arr_t *c = arr_transpose(a);
+	arr_edu *c = arr_eduranspose(a);
 	std::cout << "aT >>" << std::endl;
 	arr_print(c);
 

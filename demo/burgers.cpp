@@ -4,8 +4,8 @@
 
 int main(void)
 {
-	stack_t *burgers = stack_init();
-	queue_t *students = queue_init();
+	stack_edu *burgers = stack_init();
+	queue_edu *students = queue_init();
 
 	int count;
 	std::cin >> count;

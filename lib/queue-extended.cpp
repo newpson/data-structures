@@ -2,23 +2,23 @@
 #include "queue-extended.hpp"
 #include <iostream>
 
-node_t *queue_peek_node(queue_t *tail)
+node_edu *queue_peek_node(queue_edu *tail)
 {
 	return tail->next;
 }
 
-void queue_remove_after(node_t *node)
+void queue_remove_after(node_edu *node)
 {
 	/* WARN tail deletion is possible */
-	node_t *garbage = node->next;
+	node_edu *garbage = node->next;
 	node->next = garbage->next;
 	delete garbage;
 }
 
-void queue_print(queue_t *tail)
+void queue_print(queue_edu *tail)
 {
 	std::cout << "(";
-	for (node_t *node = tail->next;
+	for (node_edu *node = tail->next;
 			node != tail;
 			node = node->next)
 	{
@@ -32,7 +32,7 @@ void queue_print(queue_t *tail)
 	std::cout << std::endl;
 }
 
-void queue_roll(queue_t *&tail)
+void queue_roll(queue_edu *&tail)
 {
 	queue_push(tail, queue_pop(tail));
 }

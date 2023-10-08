@@ -3,14 +3,14 @@
 
 #include "node.hpp"
 
-typedef node_t queue_t;
+typedef node_edu queue_edu;
 
-node_t * queue_init(void);
-void queue_free(queue_t *queue);
+node_edu * queue_init(void);
+void queue_free(queue_edu *queue);
 
-void queue_push(queue_t *&queue, int val);
-int queue_peek(queue_t *queue);
-int queue_pop(queue_t *queue);
-bool queue_empty(queue_t *queue);
+void queue_push(queue_edu *&queue, int val);
+int queue_peek(queue_edu *queue);
+int queue_pop(queue_edu *queue);
+bool queue_empty(queue_edu *queue);
 
 #endif /* QUEUE_HPP */

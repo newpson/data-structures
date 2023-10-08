@@ -3,9 +3,9 @@
 
 #include "queue.hpp"
 
-node_t * queue_peek_node(queue_t *queue);
-void queue_remove_after(node_t *node);
-void queue_roll(queue_t *&queue);
-void queue_print(node_t *tail);
+node_edu * queue_peek_node(queue_edu *queue);
+void queue_remove_after(node_edu *node);
+void queue_roll(queue_edu *&queue);
+void queue_print(node_edu *tail);
 
 #endif /* QUEUE_EXTENDED_HPP */

@@ -1,9 +1,9 @@
 #include "array.hpp"
 #include <iostream>
 
-arr_t * arr_init(int m, int n)
+arr_edu * arr_init(int m, int n)
 {
-	arr_t *a = new arr_t;
+	arr_edu *a = new arr_edu;
 	a->m = m;
 	a->n = n;
 	a->data = new int*[m];
@@ -14,7 +14,7 @@ arr_t * arr_init(int m, int n)
 	return a;
 }
 
-void arr_free(arr_t *a)
+void arr_free(arr_edu *a)
 {
 	if (a)
 	{
@@ -30,7 +30,7 @@ void arr_free(arr_t *a)
 	}
 }
 
-void arr_fill(arr_t *a)
+void arr_fill(arr_edu *a)
 {
 	for (int i = 0; i < a->m; ++i)
 	{
@@ -41,7 +41,7 @@ void arr_fill(arr_t *a)
 	}
 }
 
-void arr_print(arr_t *a)
+void arr_print(arr_edu *a)
 {
 	for (int i = 0; i < a->m; ++i)
 	{
@@ -53,7 +53,7 @@ void arr_print(arr_t *a)
 	}
 }
 
-void arr_sum(arr_t *a, arr_t *b)
+void arr_sum(arr_edu *a, arr_edu *b)
 {
 	if (a->m == b->m || a->n == b->n)
 	{
@@ -71,9 +71,9 @@ void arr_sum(arr_t *a, arr_t *b)
 	}
 }
 
-arr_t * arr_transpose(arr_t *a)
+arr_edu * arr_eduranspose(arr_edu *a)
 {
-	arr_t *b = arr_init(a->n, a->m);
+	arr_edu *b = arr_init(a->n, a->m);
 	for (int i = 0; i < a->m; ++i)
 	{
 		for (int j = 0; j < a->n; ++j)
@@ -84,7 +84,7 @@ arr_t * arr_transpose(arr_t *a)
 	return b;
 }
 
-void arr_scalar(arr_t *a, int s)
+void arr_scalar(arr_edu *a, int s)
 {
 	for (int i = 0; i < a->m; ++i)
 	{

@@ -2,14 +2,14 @@
 
 int main(void)
 {
-	node_t *stack = stack_init();
+	node_edu *stack = stack_init();
 	stack_push(stack, 123);
 	stack_push(stack, 123);
 	stack_push(stack, 123);
 	stack_push(stack, 123);
 	stack_push(stack, 123);
 
-	for (node_t *node = stack; node; node = node->next)
+	for (node_edu *node = stack; node; node = node->next)
 	{
 		if (node->next)
 		{

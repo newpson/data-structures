@@ -13,7 +13,7 @@ bool cmp_min(int a, int b)
 
 int main(void)
 {
-	node_t *stack = stack_init();
+	node_edu *stack = stack_init();
 	stack_push(stack, 123);
 	stack_push(stack, 234);
 	stack_push(stack, 345);

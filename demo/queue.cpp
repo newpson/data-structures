@@ -2,7 +2,7 @@
 
 int main(void)
 {
-	queue_t *queue = queue_init();
+	queue_edu *queue = queue_init();
 
 	queue_print(queue);
 
