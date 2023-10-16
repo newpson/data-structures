@@ -1,34 +1,35 @@
-#include "queue-extended.hpp"
-#include <iostream>
+#include "node-list.h"
+#include "queue-extended.h"
+#include <stdio.h>
 
-enum state_e
+typedef enum
 {
 	STATE_EXIT, /* 0 */
 	STATE_IDLE,
 	STATE_PUSH,
 	STATE_PLAY
-};
+} state_e;
 
 typedef struct game
 {
 	char input;
 	state_e state;
-	queue_edu *balls;
+	queue_t *balls;
 	int removed;
 } game_t;
 
-game_t * game_init(void)
+game_t *game_init(void)
 {
-	game_t *game = new game_t;
+	game_t *game = malloc(sizeof(game_t));
 	game->state = STATE_IDLE;
 	game->input = game->removed = 0;
-	game->balls = queue_init();
+	game->balls = queue_init(sizeof(int));
 	return game;
 }
 
 void game_input(game_t *game)
 {
-	std::cin >> game->input;
+	game->input = getc(stdin);
 	if (game->input >= '0' && game->input <= '9')
 	{
 		game->state = STATE_PUSH;
@@ -48,7 +49,7 @@ void game_input(game_t *game)
 }
 
 static
-void game_remove(game_t *game, node_edu *start, int count)
+void game_remove(game_t *game, node_list_t *start, int count)
 {
 	game->removed = count;
 	for (; count; queue_remove_after(start), --count);
@@ -59,17 +60,17 @@ void game_play(game_t *game)
 {
 	int count = 0;
 	int color = -1;
-	node_edu *start = NULL;
+	node_list_t *start = NULL;
 	game->removed = 0;
-	for (node_edu *ball = game->balls->next, *pball = game->balls;
-			ball != game->balls;
+	for (node_list_t *ball = game->balls->tail->next, *pball = game->balls->tail;
+			ball != game->balls->tail;
 			ball = ball->next, pball = pball->next)
 	{
-		if (ball->val != color)
+		if (*(int *) ball->val != color)
 		{
 			if (count < 3)
 			{
-				color = ball->val;
+				color = *(int *) ball->val;
 				start = pball;
 				count = 1;
 			}
@@ -94,12 +95,11 @@ int game_tick(game_t *game)
 	switch (game->state)
 	{
 		case STATE_PUSH:
-			queue_push(game->balls, game->input-'0');
+			queue_add(game->balls, &(int){game->input-'0'});
 			game->state = STATE_IDLE;
 			break;
 
 		case STATE_PLAY:
-			/* while (game_play(game)); */
 			game_play(game);
 			game->state = STATE_IDLE;
 			break;
@@ -111,16 +111,23 @@ int game_tick(game_t *game)
 	return game->state;
 }
 
+static
+void ball_print(FILE *out, void *ball)
+{
+	fprintf(out, "%hhd", *(char *) ball);
+}
+
 void game_update(game_t *game)
 {
-	std::cout << "Removed: " << game->removed << std::endl;
-	queue_print(game->balls);
+	printf("Removed: %d\n", game->removed);
+	queue_fprint(stdout, ball_print, game->balls);
+	printf("\n");
 }
 
 void game_free(game_t *game)
 {
 	queue_free(game->balls);
-	delete game;
+	free(game);
 }
 
 int main(void)

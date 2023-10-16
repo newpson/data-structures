@@ -1,0 +1,6 @@
+#ifndef NODE_TREE_RED_BLACK_H
+#define NODE_TREE_RED_BLACK_H
+
+/* TODO */
+
+#endif /* NODE_TREE_RED_BLACK_H */

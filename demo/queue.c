@@ -1,5 +1,4 @@
-#include <queue>
-#include <iostream>
+#include "queue/queue-extended.h"
 
 typedef struct
 {
@@ -9,18 +8,18 @@ typedef struct
 
 int main(void)
 {
-	std::queue<hello_t> queue;
+	queue_t *queue = queue_init(sizeof(int));
 
 	for (int i = 0; i < 10000000; ++i)
 	{
-		hello_t temp = {i, i+1};
-		queue.push(temp);
+		queue_add(queue, &(hello_t){i, i+1});
 	}
 
 	for (int i = 0; i < 10000000; ++i)
 	{
-		queue.pop();
+		queue_poll(queue);
 	}
 
+	queue_free(queue);
 	return 0;
 }
