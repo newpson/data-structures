@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Ticket</class>
+ <widget class="QWidget" name="Ticket">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>595</width>
+    <height>168</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>595</width>
+    <height>168</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>168</height>
+   </size>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="pane" stretch="1,0,1">
+     <item>
+      <layout class="QVBoxLayout" name="personal" stretch="0,1">
+       <item>
+        <layout class="QHBoxLayout" name="ticket_info">
+         <item>
+          <widget class="QLabel" name="label_ticket">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Ticket</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="id">
+           <property name="font">
+            <font>
+             <family>Monospace</family>
+             <pointsize>18</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="ticket_spacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="name">
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_fn">
+           <property name="text">
+            <string>First name</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="name_patronymic">
+           <property name="font">
+            <font>
+             <family>Monospace</family>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_p">
+           <property name="text">
+            <string>Patronymic</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <spacer name="name_spacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_ln">
+           <property name="text">
+            <string>Last name</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="name_first">
+           <property name="font">
+            <font>
+             <family>Monospace</family>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="name_last">
+           <property name="font">
+            <font>
+             <family>Monospace</family>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="flight" stretch="0,1">
+       <item>
+        <layout class="QHBoxLayout" name="flight_destination">
+         <item>
+          <widget class="QLabel" name="label_destination">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>to</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="city">
+           <property name="font">
+            <font>
+             <family>Monospace</family>
+             <pointsize>18</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="flight_info">
+         <item row="0" column="1">
+          <widget class="QDateEdit" name="date">
+           <property name="font">
+            <font>
+             <family>Monospace</family>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="buttonSymbols">
+            <enum>QAbstractSpinBox::NoButtons</enum>
+           </property>
+           <property name="displayFormat">
+            <string>yyyy-MM-dd</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLabel" name="airplane">
+           <property name="font">
+            <font>
+             <family>Monospace</family>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_airplane">
+           <property name="text">
+            <string>Airplane</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="flight_number">
+           <property name="font">
+            <font>
+             <family>Monospace</family>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_flight_number">
+           <property name="text">
+            <string>Flight number</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_date">
+           <property name="text">
+            <string>Departure date</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <spacer name="flight_spacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>name_first</tabstop>
+  <tabstop>name_last</tabstop>
+  <tabstop>name_patronymic</tabstop>
+  <tabstop>city</tabstop>
+  <tabstop>date</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>name_first</sender>
+   <signal>editingFinished()</signal>
+   <receiver>Ticket</receiver>
+   <slot>setFirstName()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>288</x>
+     <y>-6</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>name_last</sender>
+   <signal>editingFinished()</signal>
+   <receiver>Ticket</receiver>
+   <slot>setLastName()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>241</x>
+     <y>100</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>269</x>
+     <y>-12</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>name_patronymic</sender>
+   <signal>editingFinished()</signal>
+   <receiver>Ticket</receiver>
+   <slot>setPatronymic()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>133</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>236</x>
+     <y>-18</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>city</sender>
+   <signal>editingFinished()</signal>
+   <receiver>Ticket</receiver>
+   <slot>setCity()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>432</x>
+     <y>34</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>408</x>
+     <y>-14</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>date</sender>
+   <signal>editingFinished()</signal>
+   <receiver>Ticket</receiver>
+   <slot>setDate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>486</x>
+     <y>78</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>476</x>
+     <y>-12</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>setLastName()</slot>
+  <slot>setFirstName()</slot>
+  <slot>setPatronymic()</slot>
+  <slot>setCity()</slot>
+  <slot>setDate()</slot>
+ </slots>
+</ui>

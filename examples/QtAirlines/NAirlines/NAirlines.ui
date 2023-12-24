@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NAirlines</class>
+ <widget class="QMainWindow" name="NAirlines">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>284</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>NAirlines</string>
+  </property>
+  <widget class="QWidget" name="central">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="pane" columnstretch="1,2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="brand">
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Newpson's Airlines</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="tagline">
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Best tickets here</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <layout class="QVBoxLayout" name="tickets">
+        <item>
+         <widget class="QListWidget" name="tickets_list"/>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="btn_add">
+            <property name="text">
+             <string>Add ticket</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="date_old">
+            <property name="font">
+             <font>
+              <family>Monospace</family>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="buttonSymbols">
+             <enum>QAbstractSpinBox::NoButtons</enum>
+            </property>
+            <property name="displayFormat">
+             <string>yyyy-MM-dd</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_clean">
+            <property name="text">
+             <string>Clean</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="1">
+       <widget class="QGroupBox" name="overview">
+        <property name="title">
+         <string>Ticket overview</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="Ticket" name="ticket" native="true"/>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Ticket</class>
+   <extends>QWidget</extends>
+   <header>Ticket.hpp</header>
+   <container>1</container>
+   <slots>
+    <slot>setData(QListWidgetItem*)</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>tickets_list</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>ticket</receiver>
+   <slot>setData(QListWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>200</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>513</x>
+     <y>81</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tickets_list</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>ticket</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>138</x>
+     <y>202</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>576</x>
+     <y>83</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_add</sender>
+   <signal>clicked()</signal>
+   <receiver>NAirlines</receiver>
+   <slot>addTicket()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>92</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>404</x>
+     <y>0</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clean</sender>
+   <signal>clicked()</signal>
+   <receiver>NAirlines</receiver>
+   <slot>cleanTickets()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>256</x>
+     <y>259</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>320</x>
+     <y>-9</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>addTicket()</slot>
+  <slot>cleanTickets()</slot>
+ </slots>
+</ui>

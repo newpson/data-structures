@@ -1,0 +1,7 @@
+add_subdirectory(Array)
+add_subdirectory(List)
+add_subdirectory(Stack)
+add_subdirectory(Queue)
+add_subdirectory(Deque)
+add_subdirectory(Matrix)
+add_subdirectory(Tree)

@@ -1,17 +1,12 @@
-cmake_minimum_required(VERSION 3.5)
-project(labs)
+cmake_minimum_required(VERSION 3.27)
+project(data-structures CXX)
+set(CMAKE_CXX_STANDARD 20)
 
-# add_compile_options(-g -Wall -Wextra -Wpedantic)
-add_compile_options(-O2 -Wall -Wextra -Wpedantic)
+# add_compile_options(-g)
+
+# Qt fake leaks? bruh
 # add_link_options(-fsanitize=address)
 
-# if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-# 	add_compile_options(-std=c++17)
-# elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-# 	add_compile_options(-std=c++20)
-# endif()
-
-include_directories(lib)
-
-add_subdirectory(lib)
-add_subdirectory(demo)
+add_subdirectory(external)
+add_subdirectory(src)
+# add_subdirectory(examples)

@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TabDLL</class>
+ <widget class="QWidget" name="TabDLL">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="pane" stretch="1,0">
+     <item>
+      <widget class="FrameDLL" name="frame">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="bar_controls" stretch="1,0,1">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <item>
+        <spacer name="spacer_left">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="controls">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="controls_push" stretch="1,0,0,0,1">
+           <item>
+            <spacer name="cspacer_push_left">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_push_front">
+             <property name="text">
+              <string>Push front</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="value">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="placeholderText">
+              <string>Value</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_push_back">
+             <property name="text">
+              <string>Push back</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="cspacer_push_right">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="controls_pop" stretch="1,0,0,0,1">
+           <item>
+            <spacer name="cspacer_pop_left">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_pop_front">
+             <property name="text">
+              <string>Pop front</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_clear">
+             <property name="text">
+              <string>Clear list</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_pop_back">
+             <property name="text">
+              <string>Pop back</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="cspacer_pop_right">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="spacer_right">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FrameDLL</class>
+   <extends>QFrame</extends>
+   <header>FrameDLL.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btn_push_front</sender>
+   <signal>clicked()</signal>
+   <receiver>frame</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>162</x>
+     <y>331</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>55</x>
+     <y>297</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_push_front</sender>
+   <signal>clicked()</signal>
+   <receiver>TabDLL</receiver>
+   <slot>push_front()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>139</x>
+     <y>342</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>94</x>
+     <y>-13</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_push_back</sender>
+   <signal>clicked()</signal>
+   <receiver>TabDLL</receiver>
+   <slot>push_back()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>409</x>
+     <y>332</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>417</x>
+     <y>-14</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_push_back</sender>
+   <signal>clicked()</signal>
+   <receiver>frame</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>372</x>
+     <y>327</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>369</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_pop_front</sender>
+   <signal>clicked()</signal>
+   <receiver>frame</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>371</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>94</x>
+     <y>302</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_pop_back</sender>
+   <signal>clicked()</signal>
+   <receiver>frame</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>397</x>
+     <y>380</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>459</x>
+     <y>296</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>frame</receiver>
+   <slot>update()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>281</x>
+     <y>363</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>487</x>
+     <y>294</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_pop_front</sender>
+   <signal>clicked()</signal>
+   <receiver>TabDLL</receiver>
+   <slot>pop_front()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>163</x>
+     <y>378</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>180</x>
+     <y>-12</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_pop_back</sender>
+   <signal>clicked()</signal>
+   <receiver>TabDLL</receiver>
+   <slot>pop_back()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>349</x>
+     <y>374</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>347</x>
+     <y>-10</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_clear</sender>
+   <signal>clicked()</signal>
+   <receiver>TabDLL</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>263</x>
+     <y>374</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>267</x>
+     <y>-8</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>push_front()</slot>
+  <slot>push_back()</slot>
+  <slot>pop_front()</slot>
+  <slot>pop_back()</slot>
+  <slot>clear()</slot>
+ </slots>
+</ui>
