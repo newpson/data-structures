@@ -1,5 +1,7 @@
 #include "TabDLL.hpp"
+
 #include <QWidget>
+#include <QString>
 
 TabDLL::TabDLL(QWidget *parent):
 	QWidget(parent)

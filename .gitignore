@@ -1,4 +1,2 @@
-build/*
-examples/build/*
-examples/QtAirlines/build/*
-examples/QtVisualizer/build/*
+**/build/*
+*.kdev4

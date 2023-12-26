@@ -17,9 +17,9 @@ protected:
 			}
 			if (value < sub->value)
 			{
-				return find_r(sub->left);
+				return find_r(sub->left, value);
 			}
-			return find_r(sub->right);
+			return find_r(sub->right, value);
 		}
 		return nullptr;
 	}
@@ -102,8 +102,10 @@ public:
 		return *this;
 	}
 
+	using BTree<T>::LevelNode;
 	using BTree<T>::is_empty;
-	using BTree<T>::Iterator;
-	using BTree<T>::begin;
-	using BTree<T>::end;
+	using BTree<T>::inorder;
+	using BTree<T>::preorder;
+	using BTree<T>::postorder;
+	using BTree<T>::breadthorder;
 };

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Visio</class>
+ <widget class="QMainWindow" name="Visio">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Visio</string>
   </property>
   <widget class="QWidget" name="pane">
    <layout class="QGridLayout" name="gridLayout_2">
@@ -24,6 +24,11 @@
           <item>
            <property name="text">
             <string>Doubly linked list</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>AVL Tree</string>
            </property>
           </item>
           <item>
@@ -78,7 +83,7 @@
       <widget class="TabDLL" name="tab_dll">
        <layout class="QGridLayout" name="gridLayout"/>
       </widget>
-      <widget class="QWidget" name="tab_sll"/>
+      <widget class="TabAVLT" name="tab_sll"/>
      </widget>
     </item>
    </layout>
@@ -89,6 +94,12 @@
    <class>TabDLL</class>
    <extends>QWidget</extends>
    <header>TabDLL.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TabAVLT</class>
+   <extends>QWidget</extends>
+   <header>TabAVLT.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -1,9 +1,10 @@
-#include "BSTree.hpp"
+#include "AVLTree.hpp"
 #include <iostream>
 
 int main()
 {
-	BSTree<int> tree;
+
+	AVLTree<int> tree;
 	tree.insert(25).insert(23).insert(27).insert(24).insert(22).insert(26).insert(28);
 
 	for (auto i: tree.breadthorder())

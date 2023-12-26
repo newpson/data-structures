@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.27)
 project(data-structures-examples CXX)
 set(CMAKE_CXX_STANDARD 20)
+add_compile_options(-g)
 add_link_options(-fsanitize=address)
 
 add_subdirectory(external)
@@ -52,3 +53,9 @@ target_sources(bstree
 	PRIVATE bstree.cpp)
 target_link_libraries(bstree
 	PUBLIC BSTree)
+
+add_executable(avltree)
+target_sources(avltree
+	PRIVATE avltree.cpp)
+target_link_libraries(avltree
+	PUBLIC AVLTree)

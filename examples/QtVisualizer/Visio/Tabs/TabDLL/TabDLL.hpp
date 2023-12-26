@@ -1,16 +1,20 @@
 #pragma once
 #include "DLList.hpp"
 #include "ui_TabDLL.h"
+
 #include <QWidget>
-#include <QGraphicsScene>
+#include <QString>
 
 class TabDLL: public QWidget, Ui::TabDLL
 {
 	Q_OBJECT
+
 protected:
 	DLList<QString> list;
+
 public:
 	TabDLL(QWidget *parent = nullptr);
+
 public slots:
 	void push_front();
 	void push_back();

@@ -1,12 +1,12 @@
-#include "App.hpp"
-#include "MainWindow.hpp"
+#include "Visio.hpp"
+#include <QApplication>
 
 int main(int argc, char *argv[])
 {
-	App app(argc, argv);
+	QApplication app(argc, argv);
 
-	MainWindow main_window;
-	main_window.show();
+	Visio visio;
+	visio.show();
 
 	return app.exec();
 }
