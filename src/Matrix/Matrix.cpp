@@ -1,219 +1,172 @@
 #include "Matrix.hpp"
 #include <cstddef>
 #include <algorithm>
+#include <stdexcept>
 
-Matrix::Matrix():
-	mrows(1), mcols(1), data(new double*[1])
+bool addable(const Matrix &A, const Matrix &B)
 {
-	*data = new double[1];
-	**data = 0;
+    return (A.rows() == B.rows() && A.cols() == B.cols());
 }
 
-Matrix::Matrix(std::size_t mrows, std::size_t mcols):
-	mrows(mrows), mcols(mcols)
+bool multipliable(const Matrix &A, const Matrix &B)
 {
-	if (mrows < 1)
-	{
-		mrows = 1;
-	}
-	if (mcols < 1)
-	{
-		mcols = 1;
-	}
-	data = new double*[mrows];
-	for (std::size_t i = 0; i < mrows; ++i)
-	{
-		data[i] = new double[mcols];
-	}
+    return (A.cols() == B.rows());
 }
 
-Matrix::Matrix(const Matrix &obj):
-	Matrix(obj.mrows, obj.mcols)
+Matrix::Matrix(const size_t r, const size_t c)
+    : m_rows(r), m_cols(c), m_elements(r * c)
 {
-	for (std::size_t i = 0; i < mrows; ++i)
-	{
-		std::copy_n(obj[i], mcols, data[i]);
-	}
+    if (m_elements == 0)
+        throw std::runtime_error("invalid dimensions");
+    data1d = new double[m_elements];
+    data2d = new double*[m_rows];
+    for (size_t i = 0; i < m_rows; ++i)
+        data2d[i] = data1d + i*m_cols;
 }
 
-Matrix::Matrix(std::size_t mrows, std::size_t mcols, const double &value):
-	Matrix(mrows, mcols)
+Matrix::Matrix(const Matrix &A)
+    : Matrix(A.m_rows, A.m_cols)
 {
-	for (std::size_t i = 0; i < mrows; ++i)
-	{
-		for (std::size_t j = 0; j < mcols; ++j)
-		{
-			data[i][j] = value;
-		}
-	}
+    std::copy_n(A.data1d, A.m_elements, data1d);
 }
 
 Matrix::~Matrix()
 {
-	for (std::size_t i = 0; i < mrows; ++i)
-	{
-		delete[] data[i];
-	}
-	delete[] data;
-	data = nullptr;
+    delete[] data2d;
+    delete[] data1d;
 }
 
-double *Matrix::operator[](std::size_t i)
+double *Matrix::operator[](size_t i)
 {
-	return data[i];
+    return data2d[i];
 }
 
-const double *Matrix::operator[](std::size_t i) const
+const double *Matrix::operator[](size_t i) const
 {
-	return data[i];
+    return data2d[i];
 }
 
-std::size_t Matrix::rows() const
+size_t Matrix::rows() const
 {
-	return mrows;
+    return m_rows;
 }
 
-std::size_t Matrix::cols() const
+size_t Matrix::cols() const
 {
-	return mcols;
+    return m_cols;
 }
 
-Matrix Matrix::operator+(const Matrix &obj) const
+Matrix Matrix::operator+(const Matrix &A) const
 {
-	if (addable(*this, obj))
-	{
-		Matrix tobj(mrows, mcols);
-		for (std::size_t i = 0; i < mrows; ++i)
-		{
-			for (std::size_t j = 0; j < mcols; ++j)
-			{
-				tobj[i][j] = data[i][j] + obj[i][j];
-			}
-		}
-		return tobj;
-	}
-	return Matrix();
+    if (!addable(*this, A))
+        throw std::invalid_argument("matrices are not addable");
+
+    Matrix R(m_rows, m_cols);
+    for (size_t i = 0; i < m_elements; ++i)
+        R.data1d[i] = data1d[i] + A.data1d[i];
+    return R;
 }
 
-Matrix Matrix::operator*(const Matrix &obj) const
+Matrix Matrix::operator*(const Matrix &A) const
 {
-	if (multipliable(*this, obj))
-	{
-		Matrix tobj(mrows, obj.mcols, 0);
-		for (int j = 0; j < tobj.mcols; ++j)
-		{
-			for (int i = 0; i < tobj.mrows; ++i)
-			{
-				for (int k = 0; k < mcols; ++k)
-				{
-					tobj[i][j] += data[i][k] * obj[k][j];
-				}
-			}
-		}
-		return tobj;
-	}
-	return Matrix();
+    if (!multipliable(*this, A))
+        throw std::invalid_argument("matrices are not addable");
+
+    Matrix R(m_rows, A.m_cols);
+    for (int j = 0; j < R.m_cols; ++j)
+        for (int i = 0; i < R.m_rows; ++i) {
+            R[i][j] = 0.0;
+            for (int k = 0; k < m_cols; ++k)
+                R[i][j] += data2d[i][k] * A[k][j];
+        }
+
+    return R;
 }
 
 Matrix Matrix::operator*(const double &k) const
 {
-	Matrix tobj(mrows, mcols);
-	for (std::size_t i = 0; i < mrows; ++i)
-	{
-		for (std::size_t j = 0; j < mcols; ++j)
-		{
-			tobj[i][j] = k*data[i][j];
-		}
-	}
-	return tobj;
+    Matrix R(m_rows, m_cols);
+    for (size_t i = 0; i < m_elements; ++i)
+        R.data1d[i] = k*data1d[i];
+    return R;
 }
 
 Matrix Matrix::transpose() const
 {
-	Matrix tobj(mcols, mrows);
-	for (std::size_t i = 0; i < mrows; ++i)
-	{
-		for (std::size_t j = 0; j < mcols; ++j)
-		{
-			tobj[j][i] = data[i][j];
-		}
-	}
-	return tobj;
+    Matrix R(m_cols, m_rows);
+    for (size_t i = 0; i < m_rows; ++i)
+        for (size_t j = 0; j < m_cols; ++j)
+            R[j][i] = data2d[i][j];
+    return R;
 }
 
-bool Matrix::swap(std::size_t i, std::size_t j)
+bool Matrix::swap_columns(const size_t i, const size_t j)
 {
-	if (i != j)
-	{
-		double *temp = data[i];
-		data[i] = data[j];
-		data[j] = temp;
-		return true;
-	}
-	return false;
+    if (i == j)
+        return false;
+    if (i > m_cols || j > m_cols)
+        throw std::invalid_argument("are you dumb?");
+    for (size_t k = 0; k < m_rows; ++k) {
+        const double temp = data2d[k][i];
+        data2d[k][i] = data2d[k][j];
+        data2d[k][j] = temp;
+    }
+    return true;
+}
+
+bool Matrix::swap_rows(const size_t i, const size_t j)
+{
+    if (i == j)
+        return false;
+    if (i > m_rows || j > m_rows)
+        throw std::invalid_argument("are you dumb?");
+    for (size_t k = 0; k < m_cols; ++k) {
+        const double temp = data2d[i][k];
+        data2d[i][k] = data2d[j][k];
+        data2d[j][k] = temp;
+    }
+    return true;
 }
 
 double Matrix::determinant() const
 {
-	if (mrows != mcols)
-	{
-		return 0;
-	}
+    if (m_rows != m_cols)
+        throw std::invalid_argument("couldn't calculate det of non-square matrix");
 
-	double D = 1;
-	Matrix m(*this);
+    double D = 1;
+    Matrix m(*this);
 
-	// Modified Gaussian algorithm.
-	// "Recursive" determinant calculating (see Block matrices).
-	for (std::size_t k = 0; k < m.mcols-1; ++k)
-	{
-		// Look for first non-zero element.
-		for (std::size_t i = k; i < m.mrows; ++i)
-		{
-			if (m[i][k] != 0)
-			{
-				// Swap row containing non-zero element with first row.
-				// Invert determinant if lines actually been swapped.
-				D *= (m.swap(k, i) ? -m[k][k] : m[k][k]);
-				break;
-			}
-		}
-		if (m[k][k] == 0)
-		{
-			// First element will be zero only if the whole column is null.
-			return 0;
-		}
+    // Modified Gaussian algorithm.
+    // "Recursive" determinant calculating (see Block matrices).
+    for (size_t k = 0; k < m.m_cols-1; ++k) {
+        // Look for first non-zero element.
+        for (size_t i = k; i < m.m_rows; ++i) {
+            if (m[i][k] != 0) {
+                // Swap row containing non-zero element with first row.
+                // Invert determinant if lines actually been swapped.
+                D *= (m.swap_rows(k, i) ? -m[k][k] : m[k][k]);
+                break;
+            }
+        }
+        if (m[k][k] == 0)
+            // First element will be zero only if the whole column is null.
+            return 0;
 
-		// Actually, we don't use any elements outside current square submatrix,
-		// so we can just firstly divide whole row by its first element...
-		double denominator = m[k][k];
-		for (std::size_t j = k; j < m.mcols; ++j)
-		{
-			m[k][j] /= denominator;
-		}
+        // Actually, we don't use any elements outside current square submatrix,
+        // so we can just firstly divide whole row by its first element...
+        double denominator = m[k][k];
+        for (size_t j = k; j < m.m_cols; ++j)
+            m[k][j] /= denominator;
 
-		for (std::size_t i = k+1; i < m.mrows; ++i)
-		{
-			// ...and then add first row multiplied by first element of every row
-			// below to every row below.
-			double numerator = -m[i][k];
-			for (std::size_t j = k; j < m.mcols; ++j)
-			{
-				m[i][j] += numerator * m[k][j];
-			}
-		}
-	}
+        for (size_t i = k+1; i < m.m_rows; ++i) {
+            // ...and then add first row multiplied by first element of every row
+            // below to every row below.
+            double numerator = -m[i][k];
+            for (size_t j = k; j < m.m_cols; ++j)
+                m[i][j] += numerator * m[k][j];
+        }
+    }
 
-	// The last bottom right element is remaining to be multiplied by D.
-	return D*m[m.mrows-1][m.mrows-1];
-}
-
-bool addable(const Matrix &obja, const Matrix &objb)
-{
-	return (obja.mrows == objb.mrows && obja.mcols == objb.mcols);
-}
-
-bool multipliable(const Matrix &obja, const Matrix &objb)
-{
-	return (obja.mcols == objb.mrows);
+    // The last bottom right element is remaining to be multiplied by D.
+    return D*m[m.m_rows-1][m.m_rows-1];
 }
