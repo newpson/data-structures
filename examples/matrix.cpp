@@ -21,14 +21,12 @@ std::ostream &operator<<(std::ostream &out, const Matrix &obj)
 
 int main()
 {
-    Matrix ma(5, 5);
+    Matrix ma(3, 3);
     std::initializer_list<std::initializer_list<double>> list =
     {
-        {1, 2, 3, 4, 5},
-        {4, 5, 4, 6, 7},
-        {3, 2, 1, 8, 9},
-        {1, 2, 2, 4, 5},
-        {1, 5, 3, 2, 1}
+        {1, 2, 3},
+        {4, 5, 6},
+        {2, 4, 6},
     };
 
     int i = 0;
@@ -42,8 +40,6 @@ int main()
     }
 
     std::cout << ma << std::endl << std::endl;
-    auto [L, U] = ma.LU();
-    std::cout << L << std::endl << std::endl;
-    std::cout << U << std::endl << std::endl;
+    std::cout << ma.inverse() << std::endl << std::endl;
     return 0;
 }

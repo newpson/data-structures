@@ -1,5 +1,4 @@
 #include "Matrix.hpp"
-#include <cstddef>
 #include <algorithm>
 #include <stdexcept>
 
@@ -202,4 +201,50 @@ std::tuple<Matrix, Matrix> Matrix::LU() const
     }
 
     return {L, U};
+}
+
+Matrix Matrix::inverse() const
+{
+    if (m_rows != m_cols)
+        throw std::invalid_argument("can't inverse a non-square matrix");
+
+    // augmented (A | I)
+    Matrix aug(m_rows, 2 * m_cols);
+    for (size_t i = 0; i < m_rows; ++i) {
+        for (size_t j = 0; j < m_cols; ++j)
+            aug[i][j] = data2d[i][j];
+        aug[i][i + m_cols] = 1.0;
+    }
+
+    for (size_t col = 0; col < m_cols; ++col) {
+        // find leader
+        int max_row = col;
+        for (size_t row = col + 1; row < m_rows; ++row)
+            if (std::abs(aug[row][col]) > std::abs(aug[max_row][col]))
+                max_row = row;
+        if (aug[max_row][col] == 0.0)
+            throw std::invalid_argument("matrix is singular");
+        if (max_row != col)
+            aug.swap_rows(col, max_row);
+
+        // normalize row
+        const double pivot = aug[col][col];
+        for (size_t j = col; j < aug.cols(); ++j)
+            aug[col][j] /= pivot;
+
+        // zero current column
+        for (size_t i = 0; i < m_rows; ++i)
+            if (i != col && aug[i][col] != 0.0) {
+                const double factor = aug[i][col];
+                for (size_t j = col; j < aug.cols(); ++j)
+                    aug[i][j] -= aug[col][j] * factor;
+            }
+    }
+
+    Matrix R(m_rows, m_cols);
+    for (size_t i = 0; i < m_rows; ++i)
+        for (size_t j = 0; j < m_cols; ++j)
+            R[i][j] = aug[i][j + m_cols];
+
+    return R;
 }

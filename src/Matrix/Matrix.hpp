@@ -34,6 +34,7 @@ public:
 
     Matrix transpose() const;
     std::tuple<Matrix, Matrix> LU() const;
+    Matrix inverse() const;
     double determinant() const;
 };
 
