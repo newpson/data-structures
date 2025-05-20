@@ -23,7 +23,7 @@ Matrix::Matrix(const size_t r, const size_t c)
         data2d[i] = data1d + i*m_cols;
 }
 
-Matrix::Matrix(size_t r, size_t c, double v)
+Matrix::Matrix(const size_t r, const size_t c, const double v)
     : Matrix(r, c)
 {
     std::fill_n(data1d, m_elements, v);
@@ -42,12 +42,12 @@ Matrix::~Matrix()
     delete[] data1d;
 }
 
-double *Matrix::operator[](size_t i)
+double *Matrix::operator[](const size_t i)
 {
     return data2d[i];
 }
 
-const double *Matrix::operator[](size_t i) const
+const double *Matrix::operator[](const size_t i) const
 {
     return data2d[i];
 }
@@ -62,15 +62,25 @@ size_t Matrix::cols() const
     return m_cols;
 }
 
-Matrix Matrix::operator+(const Matrix &A) const
+Matrix Matrix::add(const Matrix &A, const double k) const
 {
     if (!addable(*this, A))
         throw std::invalid_argument("matrices are not addable");
 
     Matrix R(m_rows, m_cols);
     for (size_t i = 0; i < m_elements; ++i)
-        R.data1d[i] = data1d[i] + A.data1d[i];
+        R.data1d[i] = data1d[i] + k * A.data1d[i];
     return R;
+}
+
+Matrix Matrix::operator+(const Matrix &A) const
+{
+    return add(A, 1.0);
+}
+
+Matrix Matrix::operator-(const Matrix &A) const
+{
+    return add(A, -1.0);
 }
 
 Matrix Matrix::operator*(const Matrix &A) const

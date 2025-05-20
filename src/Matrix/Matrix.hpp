@@ -15,12 +15,13 @@ protected:
 
     bool swap_columns(const size_t i, const size_t j);
     bool swap_rows(const size_t i, const size_t j);
+    Matrix add(const Matrix &A, const double k) const;
 
 public:
     Matrix() = delete;
-    Matrix(size_t m_rows, size_t m_cols = 1);
-    Matrix(size_t m_rows, size_t m_cols, double v);
-    Matrix(const Matrix &obj);
+    Matrix(const size_t r, const size_t c = 1);
+    Matrix(const size_t r, const size_t c, const double v);
+    Matrix(const Matrix &A);
     ~Matrix();
 
     double *operator[](const size_t i);
@@ -28,8 +29,9 @@ public:
     size_t rows() const;
     size_t cols() const;
 
-    Matrix operator+(const Matrix &obj) const;
-    Matrix operator*(const Matrix &obj) const;
+    Matrix operator+(const Matrix &A) const;
+    Matrix operator-(const Matrix &A) const;
+    Matrix operator*(const Matrix &A) const;
     Matrix operator*(const double &k) const;
 
     Matrix transpose() const;

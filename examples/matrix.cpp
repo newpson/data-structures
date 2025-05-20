@@ -21,25 +21,37 @@ std::ostream &operator<<(std::ostream &out, const Matrix &obj)
 
 int main()
 {
-    Matrix ma(3, 3);
-    std::initializer_list<std::initializer_list<double>> list =
-    {
-        {1, 2, 3},
-        {4, 5, 6},
-        {2, 4, 6},
-    };
+    Matrix A(3, 3);
+    Matrix B(3, 3);
+    std::initializer_list<std::initializer_list<double>> list_A =
+    {{1, 2, 3},
+     {4, 5, 6},
+     {2, 4, 6}};
+    std::initializer_list<std::initializer_list<double>> list_B =
+    {{1, 0, 0},
+     {0, 1, 0},
+     {0, 0, 1}};
 
     int i = 0;
-    for (auto li: list) {
+    for (auto li: list_A) {
         int j = 0;
         for (auto lj: li) {
-            ma[i][j] = lj;
+            A[i][j] = lj;
+            ++j;
+        }
+        ++i;
+    }
+    i = 0;
+    for (auto li: list_B) {
+        int j = 0;
+        for (auto lj: li) {
+            B[i][j] = lj;
             ++j;
         }
         ++i;
     }
 
-    std::cout << ma << std::endl << std::endl;
-    std::cout << ma.inverse() << std::endl << std::endl;
+    std::cout << A - B << std::endl << std::endl;
+    // std::cout << A.inverse() << std::endl << std::endl;
     return 0;
 }
