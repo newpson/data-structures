@@ -1,5 +1,6 @@
 #pragma once
 #include <cstddef>
+#include <tuple>
 
 class Matrix
 {
@@ -18,6 +19,7 @@ protected:
 public:
     Matrix() = delete;
     Matrix(size_t m_rows, size_t m_cols = 1);
+    Matrix(size_t m_rows, size_t m_cols, double v);
     Matrix(const Matrix &obj);
     ~Matrix();
 
@@ -29,7 +31,9 @@ public:
     Matrix operator+(const Matrix &obj) const;
     Matrix operator*(const Matrix &obj) const;
     Matrix operator*(const double &k) const;
+
     Matrix transpose() const;
+    std::tuple<Matrix, Matrix> LU() const;
     double determinant() const;
 };
 

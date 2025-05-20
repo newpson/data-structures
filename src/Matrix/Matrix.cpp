@@ -24,6 +24,13 @@ Matrix::Matrix(const size_t r, const size_t c)
         data2d[i] = data1d + i*m_cols;
 }
 
+Matrix::Matrix(size_t r, size_t c, double v)
+    : Matrix(r, c)
+{
+    std::fill_n(data1d, m_elements, v);
+}
+
+
 Matrix::Matrix(const Matrix &A)
     : Matrix(A.m_rows, A.m_cols)
 {
@@ -131,7 +138,7 @@ bool Matrix::swap_rows(const size_t i, const size_t j)
 double Matrix::determinant() const
 {
     if (m_rows != m_cols)
-        throw std::invalid_argument("couldn't calculate det of non-square matrix");
+        throw std::invalid_argument("can't calculate det of non-square matrix");
 
     double D = 1;
     Matrix m(*this);
@@ -169,4 +176,30 @@ double Matrix::determinant() const
 
     // The last bottom right element is remaining to be multiplied by D.
     return D*m[m.m_rows-1][m.m_rows-1];
+}
+
+std::tuple<Matrix, Matrix> Matrix::LU() const
+{
+    if (m_rows != m_cols)
+        throw std::invalid_argument("can't decompose a non-square matrix");
+    Matrix L(m_rows, m_cols, 0.0);
+    Matrix U(m_rows, m_cols, 0.0);
+
+    for (size_t i = 0; i < m_rows; ++i) {
+        L[i][i] = 1.0;
+        for (size_t j = 0; j < m_cols; ++j) {
+            double sum = 0.0;
+            if (i <= j) {
+                for (size_t k = 0; k < i; ++k)
+                    sum += L[i][k] * U[k][j];
+                U[i][j] = data2d[i][j] - sum;
+            } else {
+                for (size_t k = 0; k < j; ++k)
+                    sum += L[i][k] * U[k][j];
+                L[i][j] = (data2d[i][j] - sum) / U[j][j];
+            }
+        }
+    }
+
+    return {L, U};
 }
