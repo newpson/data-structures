@@ -1,11 +1,3 @@
-cmake_minimum_required(VERSION 3.27)
-project(data-structures-examples CXX)
-set(CMAKE_CXX_STANDARD 20)
-add_compile_options(-g)
-add_link_options(-fsanitize=address)
-
-add_subdirectory(external)
-
 add_executable(array)
 target_sources(array
 	PRIVATE array.cpp)
