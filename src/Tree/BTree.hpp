@@ -105,7 +105,7 @@ public:
 		delete root;
 		root = nullptr;
 	}
-	bool empty() const
+    bool is_empty() const
 	{
 		return root == nullptr;
 	}
